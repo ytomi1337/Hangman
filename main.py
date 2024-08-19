@@ -14,11 +14,14 @@ def word_roll():
     return str(random_word).upper()
 
 def hangman_quess():
+
+
+
     word = word_roll()
     word_letters = list(word)
     alphabet = set(string.ascii_uppercase)
     used_letter = set()
-    lifes =['<3', '<3']
+    lifes =['<3', '<3', '<3', '<3', '<3', '<3']
 
     for cell in excel_sheet['A']:
         if cell.value == str(word):
@@ -29,12 +32,28 @@ def hangman_quess():
 
 
     while len(word_letters) > 0:
+        print(len(word_letters))
+        print(word_letters)
 
         if lifes == []:
-            print(f'Koniec żyć, przegrana ! słowo: {word}')
-            break
+            print("Koniec gry ! Przegrana, słowo: ", word)
+
+            while True:
+                print("1.Zagraj Ponownie")
+                print("2.Menu")
+                print("")
+                wybor = input("Wybor: ")
+                print(wybor)
+                if wybor == '1':
+                    hangman_quess()
+                elif wybor == '2':
+                    return
+                else:
+                    print('Nie prawidlowa wartosc')
+
+
+
         else:
-            print(word)
             print('Kategoria:',category,'Zycia:',' '.join(lifes))
             print('Zużyte litery: ', ' '.join(used_letter))
             word_blank = [letter if letter in used_letter else '-' for letter in word]
@@ -54,6 +73,7 @@ def hangman_quess():
                 print(f'Literka: {answer} Została już wprowadzona!')
             else:
                 print('Nie prawidłowa wartość!')
+
 
 
 
